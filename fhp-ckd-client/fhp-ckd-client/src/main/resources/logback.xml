@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<!-- This is for printing logs into Console -->
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{MM-dd-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{35}.%M:%L - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/apps/common/sbootapps/sf-services/fhp-ckd-client/logs/fhp-ckd-client.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d{MM-dd-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{35}.%M:%L - %msg%n</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/apps/common/sbootapps/sf-services/fhp-ckd-client/logs/fhp-ckd-client-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>25MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>5</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<!-- Setting the root level of logging to ERROR -->
+	<root level="INFO">
+		<appender-ref ref="FILE" />
+		<!-- <appender-ref ref="consoleAppender" /> -->
+	</root>
+</configuration>
